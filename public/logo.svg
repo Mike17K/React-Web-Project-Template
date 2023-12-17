@@ -1,0 +1,8 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="40" y="40" width="120" height="120" fill="#fff" stroke="#ccc" stroke-width="2" />
+  <circle cx="100" cy="100" r="70" fill="#ccc" stroke="#ccc" stroke-width="2" />
+  <path d="M90,40 L110,80 L130,40 Z" fill="#ccc" stroke="#ccc" stroke-width="2" />
+  <path d="M100,60 A10,10 0 1,1 90,70 L110,100 L130,70 Z" fill="#ccc" stroke="#ccc" stroke-width="2" />
+  <circle cx="100" cy="100" r="50" fill="#fff" />
+  <text x="100" y="130" fill="#ccc" font-size="20">Placeholder Logo</text>
+</svg>

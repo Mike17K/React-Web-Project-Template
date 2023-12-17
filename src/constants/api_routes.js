@@ -1,0 +1,1 @@
+export const logginRoute = 'http://localhost:5000/api/auth/login'; // TODO change this to the real route
