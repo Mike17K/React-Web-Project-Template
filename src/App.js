@@ -6,23 +6,26 @@ import PrivateRoute from "./utils/PrivateRoute";
 import Layout from "./pages/Layout/Layout";
 import Home from "./pages/Home/Home";
 import NoPage from "./pages/NoPage/NoPage";
+import { AuthProvider } from './contexts/AuthContext';
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
 
-          {/* Private routes */}
-          <Route path="dashboard" element={<PrivateRoute />}>
-            <Route index element={<h1>Dashboard</h1>} />
+            {/* Private routes */}
+            <Route path="dashboard" element={<PrivateRoute />}>
+              <Route index element={<h1>Dashboard</h1>} />
+            </Route>
+
+
+            <Route path="*" element={<NoPage />} />
           </Route>
-
-
-          <Route path="*" element={<NoPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }

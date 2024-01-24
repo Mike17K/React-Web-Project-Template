@@ -1,12 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 
 const PrivateRoute = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, loading } = useContext(AuthContext);
 
-  // TODO change to a final way how to hgandle the private routes
-  return !!currentUser ? <Outlet /> : <Navigate to="/" />;
-}
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  return !!currentUser ? <Outlet /> : <Navigate to="/sign_in" />;
+};
 
 export default PrivateRoute;

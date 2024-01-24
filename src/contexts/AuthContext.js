@@ -1,28 +1,24 @@
-import { createContext, useState } from 'react';
-import { logginRoute } from '../constants/api_routes';
+import { createContext, useEffect, useState } from 'react';
+import { auth } from '../services/firebase.js';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-    const loggin = (data) => { // the data that the rever needs 
-        fetch(logginRoute, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json' // TODO think how to be done secure the Accept header
-            },
-            body: JSON.stringify(data)
-        })
-            .then(res => res.json())
-            .then(user => setCurrentUser(user))
-            .catch(err => console.log(err));
-    }
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            setCurrentUser(user);
+            setLoading(false); // Set loading to false once authentication state is determined
+        });
+
+        return () => unsubscribe();
+    }, []);
 
     return (
-        <AuthContext.Provider value={{ currentUser, loggin }}>
+        <AuthContext.Provider value={{ currentUser, loading }}>
             {children}
         </AuthContext.Provider>
     );
-}
+};
